@@ -285,7 +285,7 @@
             }
         }
 
-        var start, end, range;
+        var start, end, range, custom_class;
 
         //if no start/end dates set, check if an input element contains initial values
         if (typeof options.startDate === 'undefined' && typeof options.endDate === 'undefined') {
@@ -322,6 +322,11 @@
                 else
                     end = moment(options.ranges[range][1]);
 
+                if (typeof options.ranges[range][2] === 'string')
+                    custom_class = moment(options.ranges[range][2], this.locale.format);
+                else
+                    custom_class = moment(options.ranges[range][2]);
+
                 // If the start or end date exceed those allowed by the minDate or dateLimit
                 // options, shorten the range to the allowable period.
                 if (this.minDate && start.isBefore(this.minDate))
@@ -349,10 +354,10 @@
 
             var list = '<ul>';
             for (range in this.ranges) {
-                list += '<li data-range-key="' + range + '">' + range + '</li>';
+                list += '<li class='+custom_class+' data-range-key="' + range + '">' + range + '</li>';
             }
             if (this.showCustomRangeLabel) {
-                list += '<li data-range-key="' + this.locale.customRangeLabel + '">' + this.locale.customRangeLabel + '</li>';
+                list += '<li class='+custom_class+' data-range-key="' + this.locale.customRangeLabel + '">' + this.locale.customRangeLabel + '</li>';
             }
             list += '</ul>';
             this.container.find('.ranges').prepend(list);
