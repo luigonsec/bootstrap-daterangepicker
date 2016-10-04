@@ -323,9 +323,9 @@
                     end = moment(options.ranges[range][1]);
 
                 if (typeof options.ranges[range][2] === 'string')
-                    custom_class = moment(options.ranges[range][2], this.locale.format);
+                    custom_class =options.ranges[range][2];
                 else
-                    custom_class = moment(options.ranges[range][2]);
+                    custom_class = '';
 
                 // If the start or end date exceed those allowed by the minDate or dateLimit
                 // options, shorten the range to the allowable period.
